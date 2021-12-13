@@ -1,5 +1,6 @@
 import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import setErrorClass from './setErrorClass';
 
 const base64 =
   typeof btoa !== 'undefined'
@@ -36,6 +37,7 @@ function Radio({
       {allowedValues?.map(item => (
         <div key={item}>
           <input
+            className={setErrorClass(props)}
             checked={item === value}
             disabled={disabled}
             id={`${id}-${escape(item)}`}

@@ -1,5 +1,6 @@
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import setErrorClass from './setErrorClass'
 
 export type LongTextFieldProps = HTMLFieldProps<
   string,
@@ -15,6 +16,7 @@ function LongText({
   name,
   onChange,
   placeholder,
+  readOnly,
   value,
   ...props
 }: LongTextFieldProps) {
@@ -23,11 +25,13 @@ function LongText({
       {label && <label htmlFor={id}>{label}</label>}
 
       <textarea
+        className={setErrorClass(props)}
         disabled={disabled}
         id={id}
         name={name}
         onChange={event => onChange(event.target.value)}
         placeholder={placeholder}
+        readOnly={readOnly}
         ref={inputRef}
         value={value ?? ''}
       />
