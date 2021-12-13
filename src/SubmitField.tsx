@@ -9,16 +9,16 @@ export type SubmitFieldProps = Override<
 export default function SubmitField({
   disabled,
   inputRef,
+  readOnly,
   value,
-  className = '',
   ...props
 }: SubmitFieldProps) {
   const { error, state } = useForm();
 
   return (
     <input
-      className={className}
       disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
+      readOnly={readOnly}
       ref={inputRef}
       type="submit"
       {...(value ? { value } : {})}

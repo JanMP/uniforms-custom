@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AutoFieldProps = void 0;
 var tslib_1 = require("tslib");
+// @ts-nocheck
 var invariant_1 = tslib_1.__importDefault(require("invariant"));
-var react_1 = require("react");
 var uniforms_1 = require("uniforms");
+var uniforms_2 = require("uniforms");
+Object.defineProperty(exports, "AutoFieldProps", { enumerable: true, get: function () { return uniforms_2.AutoFieldProps; } });
 var BoolField_1 = tslib_1.__importDefault(require("./BoolField"));
 var DateField_1 = tslib_1.__importDefault(require("./DateField"));
 var ListField_1 = tslib_1.__importDefault(require("./ListField"));
@@ -12,46 +15,26 @@ var NumField_1 = tslib_1.__importDefault(require("./NumField"));
 var RadioField_1 = tslib_1.__importDefault(require("./RadioField"));
 var SelectField_1 = tslib_1.__importDefault(require("./SelectField"));
 var TextField_1 = tslib_1.__importDefault(require("./TextField"));
-function AutoField(originalProps) {
-    var _a;
-    var props = uniforms_1.useField(originalProps.name, originalProps)[0];
-    var allowedValues = props.allowedValues, checkboxes = props.checkboxes, fieldType = props.fieldType;
-    var component = props.component;
-    if (component === undefined) {
-        if (allowedValues) {
-            if (checkboxes && fieldType !== Array) {
-                component = RadioField_1.default;
-            }
-            else {
-                component = SelectField_1.default;
-            }
-        }
-        else {
-            switch (fieldType) {
-                case Array:
-                    component = ListField_1.default;
-                    break;
-                case Boolean:
-                    component = BoolField_1.default;
-                    break;
-                case Date:
-                    component = DateField_1.default;
-                    break;
-                case Number:
-                    component = NumField_1.default;
-                    break;
-                case Object:
-                    component = NestField_1.default;
-                    break;
-                case String:
-                    component = TextField_1.default;
-                    break;
-            }
-            invariant_1.default(component, 'Unsupported field type: %s', fieldType);
-        }
+var AutoField = uniforms_1.createAutoField(function (props) {
+    if (props.allowedValues) {
+        return props.checkboxes && props.fieldType !== Array
+            ? RadioField_1.default
+            : SelectField_1.default;
     }
-    return 'options' in component && ((_a = component.options) === null || _a === void 0 ? void 0 : _a.kind) === 'leaf'
-        ? react_1.createElement(component.Component, props)
-        : react_1.createElement(component, originalProps);
-}
+    switch (props.fieldType) {
+        case Array:
+            return ListField_1.default;
+        case Boolean:
+            return BoolField_1.default;
+        case Date:
+            return DateField_1.default;
+        case Number:
+            return NumField_1.default;
+        case Object:
+            return NestField_1.default;
+        case String:
+            return TextField_1.default;
+    }
+    return invariant_1.default(false, 'Unsupported field type: %s', props.fieldType);
+});
 exports.default = AutoField;

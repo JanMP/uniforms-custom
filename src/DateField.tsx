@@ -1,7 +1,7 @@
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-import setErrorClass from './setErrorClass'
 
+/* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
@@ -21,6 +21,7 @@ function Date({
   name,
   onChange,
   placeholder,
+  readOnly,
   value,
   ...props
 }: DateFieldProps) {
@@ -29,7 +30,6 @@ function Date({
       {label && <label htmlFor={id}>{label}</label>}
 
       <input
-        className={setErrorClass(props)}
         disabled={disabled}
         id={id}
         max={dateFormat(max)}
@@ -44,6 +44,7 @@ function Date({
           }
         }}
         placeholder={placeholder}
+        readOnly={readOnly}
         ref={inputRef}
         type="datetime-local"
         value={dateFormat(value) ?? ''}
@@ -52,4 +53,4 @@ function Date({
   );
 }
 
-export default connectField(Date, { kind: 'leaf' });
+export default connectField<DateFieldProps>(Date, { kind: 'leaf' });

@@ -1,6 +1,5 @@
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-import setErrorClass from './setErrorClass'
 
 export type NumFieldProps = HTMLFieldProps<
   number,
@@ -19,6 +18,7 @@ function Num({
   name,
   onChange,
   placeholder,
+  readOnly,
   step,
   value,
   ...props
@@ -28,7 +28,6 @@ function Num({
       {label && <label htmlFor={id}>{label}</label>}
 
       <input
-        className={setErrorClass(props)}
         disabled={disabled}
         id={id}
         max={max}
@@ -40,6 +39,7 @@ function Num({
           onChange(isNaN(value) ? undefined : value);
         }}
         placeholder={placeholder}
+        readOnly={readOnly}
         ref={inputRef}
         step={step || (decimal ? 0.01 : 1)}
         type="number"
@@ -49,4 +49,4 @@ function Num({
   );
 }
 
-export default connectField(Num, { kind: 'leaf' });
+export default connectField<NumFieldProps>(Num, { kind: 'leaf' });

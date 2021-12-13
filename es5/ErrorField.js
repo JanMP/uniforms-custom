@@ -7,4 +7,7 @@ function Error(_a) {
     var children = _a.children, error = _a.error, errorMessage = _a.errorMessage, props = tslib_1.__rest(_a, ["children", "error", "errorMessage"]);
     return !error ? null : (react_1.default.createElement("div", tslib_1.__assign({}, uniforms_1.filterDOMProps(props)), children || errorMessage));
 }
-exports.default = uniforms_1.connectField(Error, { initialValue: false, kind: 'leaf' });
+exports.default = uniforms_1.connectField(Error, {
+    initialValue: false,
+    kind: 'leaf',
+});

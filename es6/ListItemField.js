@@ -7,4 +7,6 @@ function ListItem({ children = React.createElement(AutoField, { label: null, nam
         React.createElement(ListDelField, { name: "" }),
         children));
 }
-export default connectField(ListItem, { initialValue: false });
+export default connectField(ListItem, {
+    initialValue: false,
+});
