@@ -1,12 +1,14 @@
 {
   "name": "uniforms-unstyled",
-  "version": "3.0.0-rc.6",
+  "version": "3.6.2",
   "license": "MIT",
-  "main": "es5/index.js",
-  "module": "es6/index.js",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "sideEffects": false,
   "description": "Unstyled components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-unstyled",
   "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
   "keywords": [
     "form",
     "forms",
@@ -17,20 +19,20 @@
     "validation"
   ],
   "files": [
-    "es5/*.d.ts",
-    "es5/*.js",
-    "es6/*.d.ts",
-    "es6/*.js",
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
     "src/*.ts",
     "src/*.tsx"
   ],
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^17.0.0 || ^16.8.0"
   },
   "dependencies": {
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "tslib": "^1.10.0",
-    "uniforms": "^3.0.0-rc.6"
+    "tslib": "^2.2.0",
+    "uniforms": "^3.6.2"
   }
 }
