@@ -1,7 +1,6 @@
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
-/* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
@@ -21,7 +20,6 @@ function Date({
   name,
   onChange,
   placeholder,
-  readOnly,
   value,
   ...props
 }: DateFieldProps) {
@@ -44,7 +42,6 @@ function Date({
           }
         }}
         placeholder={placeholder}
-        readOnly={readOnly}
         ref={inputRef}
         type="datetime-local"
         value={dateFormat(value) ?? ''}
@@ -53,4 +50,4 @@ function Date({
   );
 }
 
-export default connectField<DateFieldProps>(Date, { kind: 'leaf' });
+export default connectField(Date, { kind: 'leaf' });

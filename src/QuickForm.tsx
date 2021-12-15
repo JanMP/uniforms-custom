@@ -5,7 +5,7 @@ import BaseForm from './BaseForm';
 import ErrorsField from './ErrorsField';
 import SubmitField from './SubmitField';
 
-function Quick(parent: any) {
+function Quick(parent: any): any {
   class _ extends QuickForm.Quick(parent) {
     static Quick = Quick;
 
@@ -22,7 +22,7 @@ function Quick(parent: any) {
     }
   }
 
-  return _ as unknown as QuickForm;
+  return _;
 }
 
 export default Quick(BaseForm);

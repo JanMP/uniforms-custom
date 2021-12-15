@@ -3,21 +3,15 @@ import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import { connectField, filterDOMProps, joinName, useField, } from 'uniforms';
 function ListAdd(_a) {
-    var { disabled, initialCount, name, readOnly, value } = _a, props = __rest(_a, ["disabled", "initialCount", "name", "readOnly", "value"]);
+    var { disabled, name, value } = _a, props = __rest(_a, ["disabled", "name", "value"]);
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
-    const parent = useField(parentName, { initialCount }, { absoluteName: true })[0];
+    const parent = useField(parentName, {}, { absoluteName: true })[0];
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
-    function onAction(event) {
-        if (limitNotReached &&
-            !readOnly &&
-            (!('key' in event) || event.key === 'Enter')) {
-            parent.onChange(parent.value.concat([cloneDeep(value)]));
-        }
-    }
-    return (React.createElement("span", Object.assign({}, filterDOMProps(props), { onClick: onAction, onKeyDown: onAction, role: "button", tabIndex: 0 }), "+"));
+    return (React.createElement("span", Object.assign({}, filterDOMProps(props), { onClick: () => {
+            if (limitNotReached) {
+                parent.onChange(parent.value.concat([cloneDeep(value)]));
+            }
+        } }), "+"));
 }
-export default connectField(ListAdd, {
-    initialValue: false,
-    kind: 'leaf',
-});
+export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });

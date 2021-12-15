@@ -1,7 +1,6 @@
-// @ts-nocheck
 import invariant from 'invariant';
-import { createAutoField } from 'uniforms';
-export { AutoFieldProps } from 'uniforms';
+import { createElement } from 'react';
+import { useField } from 'uniforms';
 import BoolField from './BoolField';
 import DateField from './DateField';
 import ListField from './ListField';
@@ -10,26 +9,45 @@ import NumField from './NumField';
 import RadioField from './RadioField';
 import SelectField from './SelectField';
 import TextField from './TextField';
-const AutoField = createAutoField(props => {
-    if (props.allowedValues) {
-        return props.checkboxes && props.fieldType !== Array
-            ? RadioField
-            : SelectField;
+export default function AutoField(originalProps) {
+    var _a;
+    const props = useField(originalProps.name, originalProps)[0];
+    const { allowedValues, checkboxes, fieldType } = props;
+    let { component } = props;
+    if (component === undefined) {
+        if (allowedValues) {
+            if (checkboxes && fieldType !== Array) {
+                component = RadioField;
+            }
+            else {
+                component = SelectField;
+            }
+        }
+        else {
+            switch (fieldType) {
+                case Array:
+                    component = ListField;
+                    break;
+                case Boolean:
+                    component = BoolField;
+                    break;
+                case Date:
+                    component = DateField;
+                    break;
+                case Number:
+                    component = NumField;
+                    break;
+                case Object:
+                    component = NestField;
+                    break;
+                case String:
+                    component = TextField;
+                    break;
+            }
+            invariant(component, 'Unsupported field type: %s', fieldType);
+        }
     }
-    switch (props.fieldType) {
-        case Array:
-            return ListField;
-        case Boolean:
-            return BoolField;
-        case Date:
-            return DateField;
-        case Number:
-            return NumField;
-        case Object:
-            return NestField;
-        case String:
-            return TextField;
-    }
-    return invariant(false, 'Unsupported field type: %s', props.fieldType);
-});
-export default AutoField;
+    return 'options' in component && ((_a = component.options) === null || _a === void 0 ? void 0 : _a.kind) === 'leaf'
+        ? createElement(component.Component, props)
+        : createElement(component, originalProps);
+}

@@ -3,10 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidatedQuickForm = exports.ValidatedForm = exports.TextField = exports.SubmitField = exports.SelectField = exports.RadioField = exports.QuickForm = exports.NumField = exports.NestField = exports.LongTextField = exports.ListItemField = exports.ListField = exports.ListDelField = exports.ListAddField = exports.HiddenField = exports.ErrorsField = exports.ErrorField = exports.DateField = exports.BoolField = exports.BaseForm = exports.AutoForm = exports.AutoFields = exports.AutoFieldProps = exports.AutoField = void 0;
+exports.ValidatedQuickForm = exports.ValidatedForm = exports.TextField = exports.SubmitField = exports.SelectField = exports.RadioField = exports.QuickForm = exports.NumField = exports.NestField = exports.LongTextField = exports.ListItemField = exports.ListField = exports.ListDelField = exports.ListAddField = exports.HiddenField = exports.ErrorsField = exports.ErrorField = exports.DateField = exports.BoolField = exports.BaseForm = exports.AutoForm = exports.AutoFields = exports.AutoField = void 0;
 var AutoField_1 = require("./AutoField");
 Object.defineProperty(exports, "AutoField", { enumerable: true, get: function () { return __importDefault(AutoField_1).default; } });
-Object.defineProperty(exports, "AutoFieldProps", { enumerable: true, get: function () { return AutoField_1.AutoFieldProps; } });
 var AutoFields_1 = require("./AutoFields");
 Object.defineProperty(exports, "AutoFields", { enumerable: true, get: function () { return __importDefault(AutoFields_1).default; } });
 var AutoForm_1 = require("./AutoForm");

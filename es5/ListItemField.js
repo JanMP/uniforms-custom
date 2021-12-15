@@ -11,6 +11,4 @@ function ListItem(_a) {
         react_1.default.createElement(ListDelField_1.default, { name: "" }),
         children));
 }
-exports.default = uniforms_1.connectField(ListItem, {
-    initialValue: false,
-});
+exports.default = uniforms_1.connectField(ListItem, { initialValue: false });

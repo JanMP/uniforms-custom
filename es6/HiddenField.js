@@ -10,5 +10,5 @@ export default function HiddenField(_a) {
             props.onChange(value);
         }
     });
-    return props.noDOM ? null : (React.createElement("input", Object.assign({ disabled: props.disabled, name: props.name, readOnly: props.readOnly, ref: props.inputRef, type: "hidden", value: (_b = value !== null && value !== void 0 ? value : props.value) !== null && _b !== void 0 ? _b : '' }, filterDOMProps(props))));
+    return props.noDOM ? null : (React.createElement("input", Object.assign({ disabled: props.disabled, name: props.name, ref: props.inputRef, type: "hidden", value: (_b = value !== null && value !== void 0 ? value : props.value) !== null && _b !== void 0 ? _b : '' }, filterDOMProps(props))));
 }

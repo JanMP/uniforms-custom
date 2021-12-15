@@ -2,12 +2,12 @@ import { AutoForm } from 'uniforms';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
 
-function Auto(parent: any) {
+function Auto(parent: any): any {
   class _ extends AutoForm.Auto(parent) {
     static Auto = Auto;
   }
 
-  return _ as unknown as AutoForm;
+  return _;
 }
 
 export default Auto(ValidatedQuickForm);

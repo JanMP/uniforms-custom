@@ -1,10 +1,12 @@
 {
-  "name": "uniforms-custom",
+  "name": "uniforms-unstyled",
   "version": "3.0.0-rc.6",
   "license": "MIT",
   "main": "es5/index.js",
   "module": "es6/index.js",
-  "description": "Custom components for uniforms.",
+  "description": "Unstyled components for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-unstyled",
+  "bugs": "https://github.com/vazco/uniforms/issues",
   "keywords": [
     "form",
     "forms",

@@ -1,3 +1,2 @@
-import { BaseForm } from 'uniforms';
-declare const _default: typeof BaseForm;
+declare const _default: any;
 export default _default;

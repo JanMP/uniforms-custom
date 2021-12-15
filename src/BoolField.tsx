@@ -14,7 +14,6 @@ function Bool({
   label,
   name,
   onChange,
-  readOnly,
   value,
   ...props
 }: BoolFieldProps) {
@@ -25,7 +24,13 @@ function Bool({
         disabled={disabled}
         id={id}
         name={name}
-        onChange={() => !disabled && !readOnly && onChange(!value)}
+        onChange={
+          disabled
+            ? undefined
+            : () => {
+                onChange(!value);
+              }
+        }
         ref={inputRef}
         type="checkbox"
       />
@@ -35,4 +40,4 @@ function Bool({
   );
 }
 
-export default connectField<BoolFieldProps>(Bool, { kind: 'leaf' });
+export default connectField(Bool, { kind: 'leaf' });

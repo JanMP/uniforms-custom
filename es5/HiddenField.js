@@ -12,6 +12,6 @@ function HiddenField(_a) {
             props.onChange(value);
         }
     });
-    return props.noDOM ? null : (react_1.default.createElement("input", tslib_1.__assign({ disabled: props.disabled, name: props.name, readOnly: props.readOnly, ref: props.inputRef, type: "hidden", value: (_b = value !== null && value !== void 0 ? value : props.value) !== null && _b !== void 0 ? _b : '' }, uniforms_1.filterDOMProps(props))));
+    return props.noDOM ? null : (react_1.default.createElement("input", tslib_1.__assign({ disabled: props.disabled, name: props.name, ref: props.inputRef, type: "hidden", value: (_b = value !== null && value !== void 0 ? value : props.value) !== null && _b !== void 0 ? _b : '' }, uniforms_1.filterDOMProps(props))));
 }
 exports.default = HiddenField;

@@ -15,7 +15,6 @@ function LongText({
   name,
   onChange,
   placeholder,
-  readOnly,
   value,
   ...props
 }: LongTextFieldProps) {
@@ -29,7 +28,6 @@ function LongText({
         name={name}
         onChange={event => onChange(event.target.value)}
         placeholder={placeholder}
-        readOnly={readOnly}
         ref={inputRef}
         value={value ?? ''}
       />
@@ -37,4 +35,4 @@ function LongText({
   );
 }
 
-export default connectField<LongTextFieldProps>(LongText, { kind: 'leaf' });
+export default connectField(LongText, { kind: 'leaf' });

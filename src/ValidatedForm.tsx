@@ -2,12 +2,12 @@ import { ValidatedForm } from 'uniforms';
 
 import BaseForm from './BaseForm';
 
-function Validated(parent: any) {
+function Validated(parent: any): any {
   class _ extends ValidatedForm.Validated(parent) {
     static Validated = Validated;
   }
 
-  return _ as unknown as ValidatedForm;
+  return _;
 }
 
 export default Validated(BaseForm);
