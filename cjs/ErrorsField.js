@@ -5,7 +5,7 @@ const react_1 = tslib_1.__importDefault(require("react"));
 const uniforms_1 = require("uniforms");
 function ErrorsField(props) {
     const { error, schema } = uniforms_1.useForm();
-    return !error && !props.children ? null : (react_1.default.createElement("div", Object.assign({}, uniforms_1.filterDOMProps(props)),
+    return !error && !props.children ? null : (react_1.default.createElement("div", Object.assign({}, uniforms_1.filterDOMProps(props), { className: "u-error-list" }),
         props.children,
         react_1.default.createElement("ul", null, schema.getErrorMessages(error).map((message, index) => (react_1.default.createElement("li", { key: index }, message))))));
 }

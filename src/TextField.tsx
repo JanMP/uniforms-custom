@@ -1,6 +1,5 @@
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-import setErrorClass from './setErrorClass';
 
 export type TextFieldProps = HTMLFieldProps<
   string,
@@ -27,7 +26,6 @@ function Text({
       {label && <label htmlFor={id}>{label}</label>}
 
       <input
-        className={setErrorClass(props)}
         autoComplete={autoComplete}
         disabled={disabled}
         id={id}
