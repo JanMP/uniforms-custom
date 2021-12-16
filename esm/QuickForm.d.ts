@@ -1,6 +1,6 @@
 /// <reference types="react" />
 declare const _default: {
-    new <Model, Props extends import("uniforms").QuickFormProps<Model> = import("uniforms").QuickFormProps<Model>, State extends import("uniforms").BaseFormState<Model> = import("uniforms").BaseFormState<Model>>(props: Props): {
+    new <Model, Props extends import("uniforms").QuickFormProps<Model> = import("uniforms").QuickFormProps<Model>, State extends import("uniforms").QuickFormState<Model> = import("uniforms").QuickFormState<Model>>(props: Props): {
         getNativeFormProps(): Record<string, any>;
         getAutoField(): import("react").ComponentType<{
             name: string;
@@ -30,7 +30,7 @@ declare const _default: {
         getContextSchema(): import("uniforms").Bridge;
         getContextOnChange(): (key: string, value: any) => void;
         getContextOnSubmit(): (event?: import("react").SyntheticEvent<Element, Event> | undefined) => any;
-        getModel(mode?: "form" | "submit" | "validate" | undefined, model?: import("uniforms").DeepPartial<Model> | undefined): import("uniforms").DeepPartial<Model>;
+        getModel(mode?: import("uniforms").ModelTransformMode | undefined, model?: import("uniforms").DeepPartial<Model> | undefined): import("uniforms").DeepPartial<Model>;
         onChange(key: string, value: any): void;
         __reset(state: State): Partial<State>;
         onReset(): void;

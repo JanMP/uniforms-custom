@@ -17,7 +17,9 @@ function ListDel(_a) {
             parent.onChange(value);
         }
     }
-    return (React.createElement("span", Object.assign({}, filterDOMProps(props), { onClick: onAction, onKeyDown: onAction, role: "button", tabIndex: 0 }), "-"));
+    return (
+    // @ts-ignore
+    React.createElement("button", Object.assign({ className: "icon danger" }, filterDOMProps(props), { onClick: onAction }), "-"));
 }
 export default connectField(ListDel, {
     initialValue: false,

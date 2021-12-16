@@ -32,7 +32,7 @@ declare const _default: {
         getContextSchema(): import("uniforms").Bridge;
         getContextOnChange(): (key: string, value: any) => void;
         getContextOnSubmit(): (event?: import("react").SyntheticEvent<Element, Event> | undefined) => any;
-        getModel(mode?: "form" | "submit" | "validate" | undefined, model?: import("uniforms").DeepPartial<Model> | undefined): import("uniforms").DeepPartial<Model>;
+        getModel(mode?: import("uniforms").ModelTransformMode | undefined, model?: import("uniforms").DeepPartial<Model> | undefined): import("uniforms").DeepPartial<Model>;
         onReset(): void;
         render(): JSX.Element;
         context: any;

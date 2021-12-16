@@ -17,7 +17,9 @@ function ListAdd(_a) {
             parent.onChange(parent.value.concat([cloneDeep_1.default(value)]));
         }
     }
-    return (react_1.default.createElement("span", Object.assign({}, uniforms_1.filterDOMProps(props), { onClick: onAction, onKeyDown: onAction, role: "button", tabIndex: 0 }), "+"));
+    return (
+    // @ts-ignore
+    react_1.default.createElement("button", Object.assign({ className: "icon ok" }, uniforms_1.filterDOMProps(props), { onClick: onAction }), "+"));
 }
 exports.default = uniforms_1.connectField(ListAdd, {
     initialValue: false,

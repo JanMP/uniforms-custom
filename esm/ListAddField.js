@@ -15,7 +15,9 @@ function ListAdd(_a) {
             parent.onChange(parent.value.concat([cloneDeep(value)]));
         }
     }
-    return (React.createElement("span", Object.assign({}, filterDOMProps(props), { onClick: onAction, onKeyDown: onAction, role: "button", tabIndex: 0 }), "+"));
+    return (
+    // @ts-ignore
+    React.createElement("button", Object.assign({ className: "icon ok" }, filterDOMProps(props), { onClick: onAction }), "+"));
 }
 export default connectField(ListAdd, {
     initialValue: false,

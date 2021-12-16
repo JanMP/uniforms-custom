@@ -23,14 +23,16 @@ function Select(_a) {
             label: transform ? transform(value) : value,
         };
     }, [transform]);
-    const onOptionChange = react_1.useCallback(value => {
+    const onOptionChange = (value) => {
+        console.log('onOptionChange', value);
         const result = multiple
             ? value.map((v) => v.value)
             : value.value;
         onChange(result);
-    }, [multiple, onChange]);
+    };
     react_1.useEffect(() => {
         var _a;
+        console.log('value Changed', value);
         // @ts-ignore
         setOldValue(value);
         if (isEqual_1.default(value, oldValue)) {
@@ -40,7 +42,7 @@ function Select(_a) {
         (_a = selectRef.current) === null || _a === void 0 ? void 0 : _a.setValue(
         // @ts-ignore
         multiple ? value.map(optionFromValue) : optionFromValue(value));
-    }, [value, multiple, optionFromValue, oldValue]);
+    }, [value]);
     return (react_1.default.createElement("div", Object.assign({}, uniforms_1.filterDOMProps(props), { className: (checkboxes && setErrorClass_1.default(props)) || '' }),
         label && react_1.default.createElement("label", { htmlFor: id }, label),
         checkboxes ? (allowedValues.map(item => {
@@ -54,6 +56,6 @@ function Select(_a) {
                 react_1.default.createElement("label", { htmlFor: `${id}-${escape(item)}` }, transform ? transform(item) : item)));
         })) : (react_1.default.createElement(react_select_1.default, { ref: selectRef, isDisabled: disabled, isMulti: multiple, 
             // @ts-ignore
-            onOptionChange: onOptionChange, options: allowedValues === null || allowedValues === void 0 ? void 0 : allowedValues.map(optionFromValue), themeConfig: { control: { padding: '0 0.75rem', minHeight: '32px' } } }))));
+            onChange: onOptionChange, options: allowedValues === null || allowedValues === void 0 ? void 0 : allowedValues.map(optionFromValue) }))));
 }
 exports.default = uniforms_1.connectField(Select, { kind: 'leaf' });

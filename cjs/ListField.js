@@ -7,10 +7,12 @@ const ListAddField_1 = tslib_1.__importDefault(require("./ListAddField"));
 const ListItemField_1 = tslib_1.__importDefault(require("./ListItemField"));
 function List(_a) {
     var { children = react_1.default.createElement(ListItemField_1.default, { name: "$" }), initialCount, itemProps, label, value } = _a, props = tslib_1.__rest(_a, ["children", "initialCount", "itemProps", "label", "value"]);
-    return (react_1.default.createElement("ul", Object.assign({}, uniforms_1.filterDOMProps(props)),
-        label && (react_1.default.createElement("label", null,
-            label,
-            react_1.default.createElement(ListAddField_1.default, { initialCount: initialCount, name: "$" }))), value === null || value === void 0 ? void 0 :
+    return (react_1.default.createElement("ul", Object.assign({}, uniforms_1.filterDOMProps(props), { className: "u-list-field" }),
+        label && (react_1.default.createElement("div", null,
+            react_1.default.createElement("div", { className: "u-list-field-header" },
+                react_1.default.createElement("div", null, label),
+                react_1.default.createElement("div", null,
+                    react_1.default.createElement(ListAddField_1.default, { initialCount: initialCount, name: "$" }))))), value === null || value === void 0 ? void 0 :
         value.map((item, itemIndex) => react_1.Children.map(children, (child, childIndex) => {
             var _a;
             return react_1.isValidElement(child)

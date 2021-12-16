@@ -112,7 +112,7 @@ declare const _default: {
         getContextSchema(): import("uniforms").Bridge;
         getContextOnChange(): (key: string, value: any) => void;
         getContextOnSubmit(): (event?: import("react").SyntheticEvent<Element, Event> | undefined) => any;
-        getModel(mode?: "form" | "submit" | "validate" | undefined, model?: import("uniforms").DeepPartial<Model_1> | undefined): import("uniforms").DeepPartial<Model_1>;
+        getModel(mode?: import("uniforms").ModelTransformMode | undefined, model?: import("uniforms").DeepPartial<Model_1> | undefined): import("uniforms").DeepPartial<Model_1>;
         onReset(): void;
         render(): JSX.Element;
         context: any;
@@ -150,7 +150,7 @@ declare const _default: {
     };
     contextType?: import("react").Context<any> | undefined;
 } & {
-    new <Model_2, Props_2 extends import("uniforms").QuickFormProps<Model_2> = import("uniforms").QuickFormProps<Model_2>, State_2 extends import("uniforms").BaseFormState<Model_2> = import("uniforms").BaseFormState<Model_2>>(props: Props_2): {
+    new <Model_2, Props_2 extends import("uniforms").QuickFormProps<Model_2> = import("uniforms").QuickFormProps<Model_2>, State_2 extends import("uniforms").QuickFormState<Model_2> = import("uniforms").QuickFormState<Model_2>>(props: Props_2): {
         getNativeFormProps(): Record<string, any>;
         getAutoField(): import("react").ComponentType<{
             name: string;
@@ -180,7 +180,7 @@ declare const _default: {
         getContextSchema(): import("uniforms").Bridge;
         getContextOnChange(): (key: string, value: any) => void;
         getContextOnSubmit(): (event?: import("react").SyntheticEvent<Element, Event> | undefined) => any;
-        getModel(mode?: "form" | "submit" | "validate" | undefined, model?: import("uniforms").DeepPartial<Model_2> | undefined): import("uniforms").DeepPartial<Model_2>;
+        getModel(mode?: import("uniforms").ModelTransformMode | undefined, model?: import("uniforms").DeepPartial<Model_2> | undefined): import("uniforms").DeepPartial<Model_2>;
         onChange(key: string, value: any): void;
         __reset(state: State_2): Partial<State_2>;
         onReset(): void;

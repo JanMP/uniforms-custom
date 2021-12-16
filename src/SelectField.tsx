@@ -57,17 +57,17 @@ function Select({
     [transform],
   );
 
-  const onOptionChange = useCallback(
-    value => {
-      const result = multiple
-        ? value.map((v: { value: any }) => v.value)
-        : value.value;
-      onChange(result);
-    },
-    [multiple, onChange],
-  );
+  const onOptionChange = (value: any) => {
+    console.log('onOptionChange', value)
+    const result = multiple
+      ? value.map((v: { value: any }) => v.value)
+      : value.value;
+    onChange(result);
+  }
+
 
   useEffect(() => {
+    console.log('value Changed', value)
     // @ts-ignore
     setOldValue(value);
     if (isEqual(value, oldValue)) {
@@ -78,7 +78,7 @@ function Select({
       // @ts-ignore
       multiple ? value.map(optionFromValue) : optionFromValue(value),
     );
-  }, [value, multiple, optionFromValue, oldValue]);
+  }, [value]);
 
   return (
     <div
@@ -115,9 +115,8 @@ function Select({
           isDisabled={disabled}
           isMulti={multiple}
           // @ts-ignore
-          onOptionChange={onOptionChange}
+          onChange={onOptionChange}
           options={allowedValues?.map(optionFromValue)}
-          themeConfig={{ control: { padding: '0 0.75rem', minHeight: '32px' } }}
         />
       )}
     </div>
