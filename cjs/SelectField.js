@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+const isEqual_1 = tslib_1.__importDefault(require("lodash/isEqual"));
 const xor_1 = tslib_1.__importDefault(require("lodash/xor"));
-const react_1 = tslib_1.__importDefault(require("react"));
+const react_1 = tslib_1.__importStar(require("react"));
+const react_select_1 = tslib_1.__importDefault(require("react-select"));
 const uniforms_1 = require("uniforms");
+const setErrorClass_1 = tslib_1.__importDefault(require("./setErrorClass"));
 const base64 = typeof btoa === 'undefined'
     ? /* istanbul ignore next */ /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
     : btoa;
@@ -11,7 +14,34 @@ const escape = (x) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 function Select(_a) {
     var { allowedValues, checkboxes, disabled, fieldType, id, inputRef, label, name, onChange, placeholder, readOnly, required, disableItem, transform, value } = _a, props = tslib_1.__rest(_a, ["allowedValues", "checkboxes", "disabled", "fieldType", "id", "inputRef", "label", "name", "onChange", "placeholder", "readOnly", "required", "disableItem", "transform", "value"]);
     const multiple = fieldType === Array;
-    return (react_1.default.createElement("div", Object.assign({}, uniforms_1.filterDOMProps(props)),
+    const selectRef = react_1.useRef(null);
+    const [oldValue, setOldValue] = react_1.useState(null);
+    const optionFromValue = react_1.useCallback(value => {
+        return {
+            key: value,
+            value,
+            label: transform ? transform(value) : value,
+        };
+    }, [transform]);
+    const onOptionChange = react_1.useCallback(value => {
+        const result = multiple
+            ? value.map((v) => v.value)
+            : value.value;
+        onChange(result);
+    }, [multiple, onChange]);
+    react_1.useEffect(() => {
+        var _a;
+        // @ts-ignore
+        setOldValue(value);
+        if (isEqual_1.default(value, oldValue)) {
+            return;
+        }
+        // @ts-ignore
+        (_a = selectRef.current) === null || _a === void 0 ? void 0 : _a.setValue(
+        // @ts-ignore
+        multiple ? value.map(optionFromValue) : optionFromValue(value));
+    }, [value, multiple, optionFromValue, oldValue]);
+    return (react_1.default.createElement("div", Object.assign({}, uniforms_1.filterDOMProps(props), { className: (checkboxes && setErrorClass_1.default(props)) || '' }),
         label && react_1.default.createElement("label", { htmlFor: id }, label),
         checkboxes ? (allowedValues.map(item => {
             var _a;
@@ -22,19 +52,8 @@ function Select(_a) {
                         }
                     }, type: "checkbox" }),
                 react_1.default.createElement("label", { htmlFor: `${id}-${escape(item)}` }, transform ? transform(item) : item)));
-        })) : (react_1.default.createElement("select", { disabled: disabled, id: id, multiple: multiple, name: name, onChange: event => {
-                if (!readOnly) {
-                    const item = event.target.value;
-                    if (multiple) {
-                        const clear = event.target.selectedIndex === -1;
-                        onChange(clear ? [] : xor_1.default([item], value));
-                    }
-                    else {
-                        onChange(item !== '' ? item : undefined);
-                    }
-                }
-            }, ref: inputRef, value: value !== null && value !== void 0 ? value : '' },
-            (!!placeholder || !required || value === undefined) && !multiple && (react_1.default.createElement("option", { value: "", disabled: required, hidden: required }, placeholder || label)), allowedValues === null || allowedValues === void 0 ? void 0 :
-            allowedValues.map(value => (react_1.default.createElement("option", { disabled: disableItem === null || disableItem === void 0 ? void 0 : disableItem(value), key: value, value: value }, transform ? transform(value) : value)))))));
+        })) : (react_1.default.createElement(react_select_1.default, { ref: selectRef, isDisabled: disabled, isMulti: multiple, 
+            // @ts-ignore
+            onOptionChange: onOptionChange, options: allowedValues === null || allowedValues === void 0 ? void 0 : allowedValues.map(optionFromValue), themeConfig: { control: { padding: '0 0.75rem', minHeight: '32px' } } }))));
 }
 exports.default = uniforms_1.connectField(Select, { kind: 'leaf' });

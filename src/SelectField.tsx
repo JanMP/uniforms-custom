@@ -1,6 +1,10 @@
+import isEqual from 'lodash/isEqual';
 import xor from 'lodash/xor';
-import React, { Ref } from 'react';
+import React, { useState, useEffect, useRef, useCallback, Ref } from 'react';
+import ReactSelect from 'react-select';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+
+import setErrorClass from './setErrorClass';
 
 const base64: typeof btoa =
   typeof btoa === 'undefined'
@@ -39,8 +43,48 @@ function Select({
   ...props
 }: SelectFieldProps) {
   const multiple = fieldType === Array;
+  const selectRef = useRef(null);
+  const [oldValue, setOldValue] = useState(null);
+
+  const optionFromValue = useCallback(
+    value => {
+      return {
+        key: value,
+        value,
+        label: transform ? transform(value) : value,
+      };
+    },
+    [transform],
+  );
+
+  const onOptionChange = useCallback(
+    value => {
+      const result = multiple
+        ? value.map((v: { value: any }) => v.value)
+        : value.value;
+      onChange(result);
+    },
+    [multiple, onChange],
+  );
+
+  useEffect(() => {
+    // @ts-ignore
+    setOldValue(value);
+    if (isEqual(value, oldValue)) {
+      return;
+    }
+    // @ts-ignore
+    selectRef.current?.setValue(
+      // @ts-ignore
+      multiple ? value.map(optionFromValue) : optionFromValue(value),
+    );
+  }, [value, multiple, optionFromValue, oldValue]);
+
   return (
-    <div {...filterDOMProps(props)}>
+    <div
+      {...filterDOMProps(props)}
+      className={(checkboxes && setErrorClass(props)) || ''}
+    >
       {label && <label htmlFor={id}>{label}</label>}
       {checkboxes ? (
         allowedValues!.map(item => (
@@ -66,37 +110,15 @@ function Select({
           </div>
         ))
       ) : (
-        <select
-          disabled={disabled}
-          id={id}
-          multiple={multiple}
-          name={name}
-          onChange={event => {
-            if (!readOnly) {
-              const item = event.target.value;
-              if (multiple) {
-                const clear = event.target.selectedIndex === -1;
-                onChange(clear ? [] : xor([item], value));
-              } else {
-                onChange(item !== '' ? item : undefined);
-              }
-            }
-          }}
-          ref={inputRef}
-          value={value ?? ''}
-        >
-          {(!!placeholder || !required || value === undefined) && !multiple && (
-            <option value="" disabled={required} hidden={required}>
-              {placeholder || label}
-            </option>
-          )}
-
-          {allowedValues?.map(value => (
-            <option disabled={disableItem?.(value)} key={value} value={value}>
-              {transform ? transform(value) : value}
-            </option>
-          ))}
-        </select>
+        <ReactSelect
+          ref={selectRef}
+          isDisabled={disabled}
+          isMulti={multiple}
+          // @ts-ignore
+          onOptionChange={onOptionChange}
+          options={allowedValues?.map(optionFromValue)}
+          themeConfig={{ control: { padding: '0 0.75rem', minHeight: '32px' } }}
+        />
       )}
     </div>
   );
