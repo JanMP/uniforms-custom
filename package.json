@@ -1,5 +1,5 @@
 {
-  "name": "uniforms-unstyled",
+  "name": "uniforms-custom",
   "version": "3.6.2",
   "license": "MIT",
   "main": "./cjs/index.js",
