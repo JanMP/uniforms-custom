@@ -21,6 +21,7 @@ export type SelectFieldProps = HTMLFieldProps<
     disableItem?: (value: string) => boolean;
     inputRef?: Ref<HTMLSelectElement>;
     transform?: (value: string) => string;
+    components?: any;
   }
 >;
 
@@ -40,6 +41,7 @@ function Select({
   disableItem,
   transform,
   value,
+  components,
   ...props
 }: SelectFieldProps) {
   const multiple = fieldType === Array;
@@ -114,6 +116,7 @@ function Select({
           ref={selectRef}
           isDisabled={disabled}
           isMulti={multiple}
+          components={components}
           // @ts-ignore
           onChange={onOptionChange}
           options={allowedValues?.map(optionFromValue)}

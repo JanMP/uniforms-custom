@@ -12,7 +12,7 @@ const base64 = typeof btoa === 'undefined'
     : btoa;
 const escape = (x) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 function Select(_a) {
-    var { allowedValues, checkboxes, disabled, fieldType, id, inputRef, label, name, onChange, placeholder, readOnly, required, disableItem, transform, value } = _a, props = tslib_1.__rest(_a, ["allowedValues", "checkboxes", "disabled", "fieldType", "id", "inputRef", "label", "name", "onChange", "placeholder", "readOnly", "required", "disableItem", "transform", "value"]);
+    var { allowedValues, checkboxes, disabled, fieldType, id, inputRef, label, name, onChange, placeholder, readOnly, required, disableItem, transform, value, components } = _a, props = tslib_1.__rest(_a, ["allowedValues", "checkboxes", "disabled", "fieldType", "id", "inputRef", "label", "name", "onChange", "placeholder", "readOnly", "required", "disableItem", "transform", "value", "components"]);
     const multiple = fieldType === Array;
     const selectRef = react_1.useRef(null);
     const [oldValue, setOldValue] = react_1.useState(null);
@@ -54,7 +54,7 @@ function Select(_a) {
                         }
                     }, type: "checkbox" }),
                 react_1.default.createElement("label", { htmlFor: `${id}-${escape(item)}` }, transform ? transform(item) : item)));
-        })) : (react_1.default.createElement(react_select_1.default, { ref: selectRef, isDisabled: disabled, isMulti: multiple, 
+        })) : (react_1.default.createElement(react_select_1.default, { ref: selectRef, isDisabled: disabled, isMulti: multiple, components: components, 
             // @ts-ignore
             onChange: onOptionChange, options: allowedValues === null || allowedValues === void 0 ? void 0 : allowedValues.map(optionFromValue) }))));
 }

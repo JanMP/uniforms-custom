@@ -6,6 +6,7 @@ export declare type SelectFieldProps = HTMLFieldProps<string | string[], HTMLDiv
     disableItem?: (value: string) => boolean;
     inputRef?: Ref<HTMLSelectElement>;
     transform?: (value: string) => string;
+    components?: any;
 }>;
 declare const _default: import("uniforms").ConnectedField<SelectFieldProps, string | string[] | undefined>;
 export default _default;

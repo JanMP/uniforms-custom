@@ -10,7 +10,7 @@ const base64 = typeof btoa === 'undefined'
     : btoa;
 const escape = (x) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 function Select(_a) {
-    var { allowedValues, checkboxes, disabled, fieldType, id, inputRef, label, name, onChange, placeholder, readOnly, required, disableItem, transform, value } = _a, props = __rest(_a, ["allowedValues", "checkboxes", "disabled", "fieldType", "id", "inputRef", "label", "name", "onChange", "placeholder", "readOnly", "required", "disableItem", "transform", "value"]);
+    var { allowedValues, checkboxes, disabled, fieldType, id, inputRef, label, name, onChange, placeholder, readOnly, required, disableItem, transform, value, components } = _a, props = __rest(_a, ["allowedValues", "checkboxes", "disabled", "fieldType", "id", "inputRef", "label", "name", "onChange", "placeholder", "readOnly", "required", "disableItem", "transform", "value", "components"]);
     const multiple = fieldType === Array;
     const selectRef = useRef(null);
     const [oldValue, setOldValue] = useState(null);
@@ -52,7 +52,7 @@ function Select(_a) {
                         }
                     }, type: "checkbox" }),
                 React.createElement("label", { htmlFor: `${id}-${escape(item)}` }, transform ? transform(item) : item)));
-        })) : (React.createElement(ReactSelect, { ref: selectRef, isDisabled: disabled, isMulti: multiple, 
+        })) : (React.createElement(ReactSelect, { ref: selectRef, isDisabled: disabled, isMulti: multiple, components: components, 
             // @ts-ignore
             onChange: onOptionChange, options: allowedValues === null || allowedValues === void 0 ? void 0 : allowedValues.map(optionFromValue) }))));
 }
