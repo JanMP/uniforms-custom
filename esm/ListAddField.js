@@ -17,7 +17,7 @@ function ListAdd(_a) {
     }
     return (
     // @ts-ignore
-    React.createElement("button", Object.assign({ className: "icon ok" }, filterDOMProps(props), { onClick: onAction }), "+"));
+    React.createElement("button", Object.assign({ type: "button", className: "icon ok" }, filterDOMProps(props), { onClick: onAction }), "+"));
 }
 export default connectField(ListAdd, {
     initialValue: false,
