@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidatedQuickForm = exports.ValidatedForm = exports.TextField = exports.SubmitField = exports.SelectField = exports.RadioField = exports.QuickForm = exports.NumField = exports.NestField = exports.LongTextField = exports.ListItemField = exports.ListField = exports.ListDelField = exports.ListAddField = exports.HiddenField = exports.ErrorsField = exports.ErrorField = exports.DateField = exports.BoolField = exports.BaseForm = exports.AutoForm = exports.AutoFields = exports.AutoField = void 0;
+exports.setClassNamesForProps = exports.ValidatedQuickForm = exports.ValidatedForm = exports.TextField = exports.SubmitField = exports.SelectField = exports.RadioField = exports.QuickForm = exports.NumField = exports.NestField = exports.LongTextField = exports.ListItemField = exports.ListField = exports.ListDelField = exports.ListAddField = exports.HiddenField = exports.ErrorsField = exports.ErrorField = exports.DateField = exports.BoolField = exports.BaseForm = exports.AutoForm = exports.AutoFields = exports.AutoField = void 0;
 var AutoField_1 = require("./AutoField");
 Object.defineProperty(exports, "AutoField", { enumerable: true, get: function () { return __importDefault(AutoField_1).default; } });
 var AutoFields_1 = require("./AutoFields");
@@ -50,3 +50,5 @@ var ValidatedForm_1 = require("./ValidatedForm");
 Object.defineProperty(exports, "ValidatedForm", { enumerable: true, get: function () { return __importDefault(ValidatedForm_1).default; } });
 var ValidatedQuickForm_1 = require("./ValidatedQuickForm");
 Object.defineProperty(exports, "ValidatedQuickForm", { enumerable: true, get: function () { return __importDefault(ValidatedQuickForm_1).default; } });
+var setClassNamesForProps_1 = require("./setClassNamesForProps");
+Object.defineProperty(exports, "setClassNamesForProps", { enumerable: true, get: function () { return __importDefault(setClassNamesForProps_1).default; } });
