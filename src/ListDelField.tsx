@@ -41,6 +41,8 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   return (
     // @ts-ignore
     <button className="icon danger"
+    // @ts-ignore
+      type="button"
       {...filterDOMProps(props)}
       onClick={onAction}
     >
