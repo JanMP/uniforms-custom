@@ -39,15 +39,15 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   }
 
   return (
-    // @ts-ignore
-    <button className="icon danger"
-    // @ts-ignore
-      type="button"
+    <span
       {...filterDOMProps(props)}
       onClick={onAction}
+      onKeyDown={onAction}
+      role="button"
+      tabIndex={0}
     >
       -
-    </button>
+    </span>
   );
 }
 

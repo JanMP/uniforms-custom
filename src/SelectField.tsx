@@ -1,10 +1,6 @@
-import isEqual from 'lodash/isEqual';
 import xor from 'lodash/xor';
-import React, { useState, useEffect, useRef, useCallback, Ref } from 'react';
-import ReactSelect from 'react-select';
+import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-
-import setClassNamesForProps from './setClassNamesForProps';
 
 const base64: typeof btoa =
   typeof btoa === 'undefined'
@@ -21,8 +17,6 @@ export type SelectFieldProps = HTMLFieldProps<
     disableItem?: (value: string) => boolean;
     inputRef?: Ref<HTMLSelectElement>;
     transform?: (value: string) => string;
-    components?: any;
-    hasFloatingLabel?: boolean
   }
 >;
 
@@ -42,51 +36,12 @@ function Select({
   disableItem,
   transform,
   value,
-  components,
   ...props
 }: SelectFieldProps) {
   const multiple = fieldType === Array;
-  const selectRef = useRef(null);
-  const [oldValue, setOldValue] = useState(null);
-
-  const optionFromValue = useCallback(
-    value => {
-      return {
-        key: value,
-        value,
-        label: transform ? transform(value) : value,
-      };
-    },
-    [transform],
-  );
-
-  const onOptionChange = (value: any) => {
-    const result = multiple
-      ? value.map((v: { value: any }) => v.value)
-      : value.value;
-    onChange(result);
-  }
-
-
-  useEffect(() => {
-    // @ts-ignore
-    setOldValue(value);
-    if (isEqual(value, oldValue)) {
-      return;
-    }
-    // @ts-ignore
-    selectRef.current?.setValue(
-      // @ts-ignore
-      multiple ? value.map(optionFromValue) : optionFromValue(value),
-    );
-  }, [value]);
-
   return (
-    <div
-      {...filterDOMProps(props)}
-      className={(checkboxes && setClassNamesForProps(props)) || ''}
-    >
-      {label && !props.hasFloatingLabel && <label htmlFor={id}>{label}</label>}
+    <div {...filterDOMProps(props)}>
+      {label && <label htmlFor={id}>{label}</label>}
       {checkboxes ? (
         allowedValues!.map(item => (
           <div key={item}>
@@ -108,19 +63,40 @@ function Select({
             <label htmlFor={`${id}-${escape(item)}`}>
               {transform ? transform(item) : item}
             </label>
-            {label && props.hasFloatingLabel && <label htmlFor={id}>{label}</label>}
           </div>
         ))
       ) : (
-        <ReactSelect
-          ref={selectRef}
-          isDisabled={disabled}
-          isMulti={multiple}
-          components={components}
-          // @ts-ignore
-          onChange={onOptionChange}
-          options={allowedValues?.map(optionFromValue)}
-        />
+        <select
+          disabled={disabled}
+          id={id}
+          multiple={multiple}
+          name={name}
+          onChange={event => {
+            if (!readOnly) {
+              const item = event.target.value;
+              if (multiple) {
+                const clear = event.target.selectedIndex === -1;
+                onChange(clear ? [] : xor([item], value));
+              } else {
+                onChange(item !== '' ? item : undefined);
+              }
+            }
+          }}
+          ref={inputRef}
+          value={value ?? ''}
+        >
+          {(!!placeholder || !required || value === undefined) && !multiple && (
+            <option value="" disabled={required} hidden={required}>
+              {placeholder || label}
+            </option>
+          )}
+
+          {allowedValues?.map(value => (
+            <option disabled={disableItem?.(value)} key={value} value={value}>
+              {transform ? transform(value) : value}
+            </option>
+          ))}
+        </select>
       )}
     </div>
   );
